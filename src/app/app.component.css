@@ -1,0 +1,22 @@
+.form-container{
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    margin-top: 100px;
+    height: 650px ;
+    width: 600px;
+    box-shadow: 0 8px 16px 0 rgba(25, 25, 25, 0.9);
+    border-radius: 35px;
+    border-style:hidden;
+}
+form{
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
+
+.table{
+    padding-top: 50px;
+    flex-direction: column;
+}

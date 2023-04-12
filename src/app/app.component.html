@@ -1,0 +1,94 @@
+<div class="form-container">
+  <form [formGroup]="formData" (ngSubmit)="onSubmit(formData)" >
+    <h2>Staff Request Form</h2>
+
+    <mat-form-field class="stuff">
+      <label for="user-date">Date: </label>
+      <input formControlName="date"  matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY" [min]="today">
+      <mat-datepicker-toggle matSuffix [for] ="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="stuff">
+      <label for="user-jobTitle">Job Title: </label>
+      <input formControlName="jobTitle" matInput placeholder="Ex. Backend">
+    </mat-form-field>
+
+    <mat-form-field class="stuff">
+      <label for="user-department">Department: </label>
+      <mat-select formControlName="department" placeholder="Select">
+        <mat-option value="HR">HR</mat-option>
+        <mat-option value="Software Development">Software Development</mat-option>
+        <mat-option value="Marketing">Marketing</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formData.get('department')?.errors">
+        Please select a department
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="stuff">
+      <label for="user-hmn">Hiring Manager Name: </label>
+      <input formControlName="hmn" type="text" matInput placeholder="John Smith">
+    </mat-form-field>
+
+    <mat-form-field class="stuff">
+      <label for="user-hme">Hiring Manager Email: </label>
+      <input matInput placeholder="example@domain.com" formControlName="hme">
+      <mat-error *ngIf="formData.get('hme')?.errors?.['email']">
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="!formData.valid">Submit</button>
+  </form> 
+</div> 
+
+<!--
+<p>
+  Value: {{ userDate }}
+</p>
+<p>
+  Value: {{ userJob }}
+</p>
+<p>
+  Value: {{ userDepartment }}
+</p>
+<p>
+  Value: {{ userHMN }}
+<p>
+  Value: {{ userHME }}
+</p>
+-->
+<div class="table" *ngIf="dataSource.length != 0">
+  <table mat-table [dataSource]="dataSource" class="mat-table">
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date. </th>
+      <td mat-cell *matCellDef="let element"> {{ element.date }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="jobTitle">
+      <th mat-header-cell *matHeaderCellDef> Job. </th>
+      <td mat-cell *matCellDef="let element"> {{ element.jobTitle }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="department">
+      <th mat-header-cell *matHeaderCellDef> Department. </th>
+      <td mat-cell *matCellDef="let element"> {{ element.department }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hmn">
+      <th mat-header-cell *matHeaderCellDef> Hiring Manager Name. </th>
+      <td mat-cell *matCellDef="let element"> {{ element.hmn }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hme">
+      <th mat-header-cell *matHeaderCellDef> Hiring Manager Email </th>
+      <td mat-cell *matCellDef="let element"> {{ element.hme }} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
